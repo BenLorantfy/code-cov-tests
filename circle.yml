@@ -1,0 +1,18 @@
+machine:
+    node:
+        version: 6.9.1
+
+dependencies:
+    cache_directories:
+        - ~/code-cov-tests/node_modules
+
+    override:
+        - cd ~/code-cov-tests && npm install
+
+test:
+    override:
+        - cd ~/code-cov-tests && npm test
+
+    post:
+        - npm run build
+        - bash <(curl -s https://codecov.io/bash)
